@@ -27,7 +27,7 @@
                     <h5 class="card-title">{{$artikel->isi}}</h5>
                 </div>
                 <div class="card-footer">
-                      @foreach(explode(',', $artikel->tag) as $tag=>$value)
+                      @foreach(explode(' ', $artikel->tag) as $value)
                         <p class="btn btn-primary">{{ $value }} </p>
                       @endforeach
                 </div>

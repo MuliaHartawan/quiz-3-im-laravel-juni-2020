@@ -29,3 +29,4 @@ Route::post('/artikel', 'ArtikelController@store'); //menyimpan data artikel
 Route::get('/artikel/{id}', 'ArtikelController@show'); //menampilkan detail item dengan id
 Route::get('/artikel/{id}/edit', 'ArtikelController@edit'); //menampilkan form untuk update item
 Route::put('/artikel/{id}', 'ArtikelController@update'); //menyimpan perubahan dari form update
+Route::delete('/artikel/{id}', 'ArtikelController@destroy'); //menghapus data dengan id

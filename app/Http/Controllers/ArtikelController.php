@@ -22,6 +22,7 @@ class ArtikelController extends Controller
         $artikel = ArtikelModel::getData();
 
         return view ('artikel.index', compact('artikel'));
+
     }
 
     /**
@@ -44,22 +45,24 @@ class ArtikelController extends Controller
      */
     public function store(Request $request)
     {
-        //menambahkan pesan validasi
-        
+         //menambahkan pesan validasi
+        $messages = [
+            'required' => 'Kolom Tidak Boleh Kosong'
+        ];
 
         //rules validasi inputan user
-        $validtedData = $request->validate([
+        Validator::make($request->all(),[
             'judul' => 'required',
             'isi' => 'required',
             'tag' => 'required',
-        ], $messages);
+        ], $messages)->validate();
 
         $slug = Str::slug($request->judul, '-');
         $data = $request->all();
         unset($data['_token']);
 
         //jika lolos verifikasi masukkan ke database
-        ArtikelModel::simpan([    
+        $artikel = ArtikelModel::simpan([    
             'judul' => $request->judul,
             'slug' => $slug,
             'isi' => $request->isi,
@@ -67,7 +70,11 @@ class ArtikelController extends Controller
             'user_id' => 1,
         ]);
 
-        return redirect('/artikel')->with('sukses', 'Artikel Berhasil Ditambahkan');
+        if($artikel){
+            return redirect('/artikel')->with('success', 'Artikel berhasil ditambahkan');
+        }
+        return redirect('/artikel')->with('error', 'Artikel gagal ditambahkan');
+
     }
 
     /**
@@ -115,19 +122,18 @@ class ArtikelController extends Controller
         ];
 
         //rules validasi inputan user
-        $validtedData = $request->validate([
+        Validator::make($request->all(),[
             'judul' => 'required',
             'isi' => 'required',
-            'slug' => 'required',
             'tag' => 'required',
-        ], $messages);
+        ], $messages)->validate();
 
         $slug = Str::slug($request->judul, '-');
         $data = $request->all();
         unset($data['_token']);
 
         //jika lolos verifikasi masukkan ke database
-        ArtikelModel::updateData([    
+        $artikel = ArtikelModel::updateData([    
             'judul' => $request->judul,
             'slug' => $slug,
             'isi' => $request->isi,
@@ -135,7 +141,11 @@ class ArtikelController extends Controller
             'user_id' =>1
         ], $id);
 
-        return redirect('/artikel')->with('sukses', 'Artikel Berhasil Ditambahkan');
+
+        if($artikel){
+            return redirect('/artikel')->with('success', 'Artikel berhasil ditambahkan');
+        }
+        return redirect('/artikel')->with('error', 'Artikel gagal ditambahkan');
 
     }
 
@@ -147,8 +157,15 @@ class ArtikelController extends Controller
      */
     public function destroy($id)
     {
+        dd($id);
         //hapus data artikel
-         $data = ArticleModel::hapus($id);
+         $data = ArtikelModel::hapus($id);
+        dd($data);
+        if($data){
+            return redirect('/artikel')->with('success', 'Artikel berhasil dihapus');
+        }
+        return redirect('/artikel')->with('error', 'Artikel gagal dihapus');
+
 
     }
 }

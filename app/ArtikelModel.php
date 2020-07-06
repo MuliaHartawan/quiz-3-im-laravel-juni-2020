@@ -28,6 +28,7 @@ class ArtikelModel extends Model
     public static function updateData($data, $id)
     {
         $update = DB::table('artikels')->where('id', $id)->update($data);
+        return $update;
     }
 
     public static function hapus($id)

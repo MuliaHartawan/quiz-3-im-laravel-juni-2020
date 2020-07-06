@@ -17,9 +17,9 @@
                 <h6 class="m-0 font-weight-bold text-primary">Update Artikel</h6>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{url('/artikel')}}">
+                    <form method="post" action="{{url('/artikel/'. $artikel->id)}}">
                      {{ csrf_field() }}
-                     method('put')
+                     @method('put')
                         <div class="form-group">
                             <label for="judulPertanyaa">Judul Artikel</label>
                             <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{$artikel->judul}}" placeholder="Masukkan Judul Pertanyaan">
@@ -36,7 +36,7 @@
                         </div>
                         <div class="form-group">
                             <label for="isiPertanyaan">Tag</label>
-                            <input type="text" class="form-control @error('tag') is-invalid @enderror" id="tag" name="tag" value="{{artikel->tag}}" placeholder="Masukkan Tag Artikel"> 
+                            <input type="text" class="form-control @error('tag') is-invalid @enderror" id="tag" name="tag" value="{{$artikel->tag}}" placeholder="Masukkan Tag Artikel"> 
                             @error('tag')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror

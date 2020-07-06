@@ -19,7 +19,7 @@
                     </div>
                 @endif
                 @if (session('error'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-danger">
                         {{ session('error') }}
                     </div>
                 @endif
@@ -47,10 +47,10 @@
                                 <div class="d-flex justify-content-center">
                                     <a href="{{ url('artikel/'.$data->id.'/edit') }}" class="btn btn-warning btn-sm rounded-pill mx-2"><i class="fa fa-edit"></i></a>
                                     <a href="{{ url('artikel/'.$data->id) }}" class="btn btn-success btn-sm rounded-pill mx-2"><i class="fa fa-eye"></i></a>
-                                    <form action="{{ url('artikel/'.$artikel->id) }}" method="post">
+                                    <form action="{{ url('artikel/'.$data->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button class="btn btn-danger btn-sm rounded-pill mx-2"><i class="fa fa-trash"></i></button>
+                                    <button type="submit" class="btn btn-danger btn-sm rounded-pill mx-2" onclick="confirm('Apakah Anda yakin hapus {{'$artikel->judul'}} ?')"><i class="fa fa-trash"></i></button>
                                     </form>
                                 </div>
                             </td>
