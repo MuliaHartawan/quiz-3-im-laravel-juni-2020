@@ -157,10 +157,8 @@ class ArtikelController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
         //hapus data artikel
          $data = ArtikelModel::hapus($id);
-        dd($data);
         if($data){
             return redirect('/artikel')->with('success', 'Artikel berhasil dihapus');
         }

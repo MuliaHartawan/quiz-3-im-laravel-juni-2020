@@ -50,7 +50,7 @@
                                     <form action="{{ url('artikel/'.$data->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger btn-sm rounded-pill mx-2" onclick="confirm('Apakah Anda yakin hapus {{'$artikel->judul'}} ?')"><i class="fa fa-trash"></i></button>
+                                    <button type="submit" class="btn btn-danger btn-sm rounded-pill mx-2"><i class="fa fa-trash"></i></button>
                                     </form>
                                 </div>
                             </td>
